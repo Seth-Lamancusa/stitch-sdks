@@ -1,0 +1,12 @@
+{
+  "name": "stitch-js-sdk",
+  "version": "0.1.0",
+  "type": "module",
+  "private": true,
+  "main": "./index.js",
+  "exports": {
+    ".": "./index.js",
+    "./delegation.js": "./delegation.js",
+    "./messages.js": "./messages.js"
+  }
+}
