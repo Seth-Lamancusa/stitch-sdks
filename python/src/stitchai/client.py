@@ -17,6 +17,8 @@ from .resources import (
     AsyncRecipients,
     Managed,
     AsyncManaged,
+    Keys,
+    AsyncKeys,
 )
 
 DEFAULT_BASE_URL = "https://api.stitch.lol"
@@ -69,6 +71,7 @@ class StitchClient:
         self.users = Users(self)
         self.recipients = Recipients(self)
         self.managed = Managed(self)
+        self.keys = Keys(self)
 
     def _request(
         self,
@@ -190,6 +193,7 @@ class AsyncStitchClient:
         self.users = AsyncUsers(self)
         self.recipients = AsyncRecipients(self)
         self.managed = AsyncManaged(self)
+        self.keys = AsyncKeys(self)
 
     async def _request(
         self,

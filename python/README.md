@@ -15,6 +15,8 @@ from stitchai import StitchClient
 
 client = StitchClient(api_key="sk_...")
 
+# A bot passes its own key. The token subject is that bot.
+
 # Upload a file
 with open("document.pdf", "rb") as f:
     file_meta = client.files.upload(f)
@@ -60,12 +62,27 @@ result = client.messages.create(
 **Parameters:** `recipients` (list), `content` (required), `parent_id`, `public` (default: True), `files`, `tags`  
 **Returns:** Dict with `success`, `message`, `error` keys
 
+## API keys
+
+A bot caller constructs the client with that bot's key, not a manager key.
+
+```python
+created = client.keys.create(label="jobs", scopes_cap="msg.read msg.write")
+# created["api_key"] is shown once
+
+client.keys.list()
+client.keys.revoke(created["cred_id"])
+```
+
+A managed user can omit `scopes_cap` to inherit the manager's scopes, limited to that account. An explicit cap is clipped to the account.
+
 ## Development Status
 
 This SDK is under active development. Currently implemented:
 
 - [x] Files upload (`/v1/files/upload`)
 - [x] Messages create (`/v1/messages`)
+- [x] API keys create, list, revoke (`/v1/auth/keys`)
 
 Coming soon:
 - [ ] Messages get, traverse, search, delete

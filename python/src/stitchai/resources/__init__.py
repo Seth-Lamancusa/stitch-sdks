@@ -5,6 +5,7 @@ from .messages import Messages, AsyncMessages
 from .users import Users, AsyncUsers
 from .recipients import Recipients, AsyncRecipients
 from .managed import Managed, AsyncManaged
+from .keys import Keys, AsyncKeys
 
 __all__ = [
     "Files",
@@ -17,4 +18,6 @@ __all__ = [
     "AsyncRecipients",
     "Managed",
     "AsyncManaged",
+    "Keys",
+    "AsyncKeys",
 ]

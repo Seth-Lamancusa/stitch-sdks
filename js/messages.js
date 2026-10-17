@@ -53,16 +53,18 @@ export function buildMessageInput({
  *   POST /v1/messages/import/quote
  *
  * Auth:
- *   Authorization: Bearer <delegated_access_token>
+ *   Authorization: Bearer <accessToken>
  */
 export async function importQuoteMessages({
   apiBaseUrl,
+  accessToken,
   delegatedAccessToken,
   messages,
   signal,
 }) {
+  const token = accessToken || delegatedAccessToken;
   if (!apiBaseUrl) throw new Error('apiBaseUrl is required');
-  if (!delegatedAccessToken) throw new Error('delegatedAccessToken is required');
+  if (!token) throw new Error('accessToken is required');
   if (!Array.isArray(messages) || messages.length === 0) {
     throw new Error('messages must be a non-empty array');
   }
@@ -74,7 +76,7 @@ export async function importQuoteMessages({
     url,
     method: 'POST',
     headers: {
-      Authorization: `Bearer ${delegatedAccessToken}`,
+      Authorization: `Bearer ${token}`,
     },
     body,
     signal,
@@ -89,12 +91,14 @@ export async function importQuoteMessages({
  */
 export async function createMessages({
   apiBaseUrl,
+  accessToken,
   delegatedAccessToken,
   messages,
   signal,
 }) {
+  const token = accessToken || delegatedAccessToken;
   if (!apiBaseUrl) throw new Error('apiBaseUrl is required');
-  if (!delegatedAccessToken) throw new Error('delegatedAccessToken is required');
+  if (!token) throw new Error('accessToken is required');
   if (!Array.isArray(messages) || messages.length === 0) {
     throw new Error('messages must be a non-empty array');
   }
@@ -106,7 +110,7 @@ export async function createMessages({
     url,
     method: 'POST',
     headers: {
-      Authorization: `Bearer ${delegatedAccessToken}`,
+      Authorization: `Bearer ${token}`,
     },
     body,
     signal,
